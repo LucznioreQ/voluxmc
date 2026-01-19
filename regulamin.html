@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regulamin - VoluxMC</title>
+    <style>
+        /* Styl bazowy dla jasnego motywu */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9; /* Bardzo jasne tło */
+            color: #222; /* Ciemny tekst dla czytelności */
+            scroll-behavior: smooth;
+        }
+
+        /* PASEK NAWIGACJI (Bez zmian, pasuje idealnie) */
+        nav {
+            background-color: rgba(255, 255, 255, 0.98);
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 60px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            box-sizing: border-box;
+            z-index: 1000;
+            border-bottom: 3px solid #ff4500;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .nav-item { position: relative; }
+        .nav-link {
+            color: #000000;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            padding: 10px 0;
+            display: inline-block;
+        }
+        .nav-link:hover { color: #ff4500; transform: translateY(-2px); }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(90deg, #ff4500, #ff8800);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after { width: 100%; }
+        
+        .logo-container img {
+            height: 70px;
+            transition: transform 0.3s ease;
+        }
+
+        /* NAGŁÓWEK STRONY */
+        .page-header {
+            margin-top: 150px;
+            text-align: center;
+            padding-bottom: 40px;
+        }
+        .page-header h1 {
+            font-size: 3.5rem;
+            margin: 0;
+            background: linear-gradient(90deg, #ff4500, #ff8800);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            font-weight: 900;
+        }
+        .page-header p {
+            color: #666;
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        /* KONTENER REGULAMINU */
+        .rules-container {
+            max-width: 950px;
+            margin: 0 auto 100px auto;
+            padding: 0 20px;
+        }
+
+        .rule-section {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-left: 6px solid #ff4500; /* Mocniejszy akcent z boku */
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+        }
+
+        .rule-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            border-color: #ff4500;
+        }
+
+        .rule-section h2 {
+            margin-top: 0;
+            color: #121212;
+            font-size: 1.6rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .rule-list {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0 0 0;
+        }
+
+        .rule-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+            color: #444;
+            display: flex;
+            align-items: flex-start;
+            line-height: 1.5;
+        }
+
+        .rule-list li:last-child {
+            border-bottom: none;
+        }
+
+        .rule-list li span {
+            color: #ff4500;
+            font-weight: 800;
+            min-width: 45px;
+            display: inline-block;
+        }
+
+        /* STOPKA */
+        footer {
+            background-color: #ffffff;
+            border-top: 1px solid #e0e0e0;
+            text-align: center;
+            padding: 40px;
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        /* Responsywność dla telefonów */
+        @media (max-width: 600px) {
+            nav { padding: 0 20px; }
+            .page-header h1 { font-size: 2.2rem; }
+            .rule-section { padding: 20px; }
+        }
+                .logo-container img:hover {
+            transform: scale(1.05) rotate(2deg); /* Interaktywne logo */
+        }
+                .logo-container img {
+            height: 70px; /* Nieco większe logo dla balansu */
+            transition: transform 0.3s ease;
+            filter: drop-shadow(0 0 5px rgba(255, 69, 0, 0.3));
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+        <div class="nav-item">
+            <a href="taryfikator.html" class="nav-link">Taryfikator</a>
+        </div>
+
+        <div class="nav-item">
+            <a href="https://sklep.voluxmc.pl" target="_blank" class="nav-link"">Sklep</a>
+        </div>
+        
+        <div class="logo-container">
+            <a href="index.html"><img src="logo.png" alt="VoluxMC Logo"></a>
+        </div>
+
+        <div class="nav-item">
+            <a href="regulamin.html" class="nav-link">Regulamin</a>
+        </div>
+
+        <div class="nav-item">
+            <a href="https://dc.voluxmc.pl" target="_blank" class="nav-link" ">Discord</a>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <h1>Regulamin</h1>
+        <p>Regulamin serwera VoluxMC</p>
+    </header>
+
+    <main class="rules-container">
+        
+        <section class="rule-section">
+            <h2>§1 Obraza / Wulgaryzmy</h2>
+            <ul class="rule-list">
+                <li><span>1.1</span> Zakaz używania wulgaryzmów.</li>
+                <li><span>1.2</span> Zakaz obrażania graczy.</li>
+                <li><span>1.3</span> Zakaz obrażania administracji.</li>
+                <li><span>1.4</span> Zakaz publikowania treści nieodpowiednich.</li>
+            </ul>
+        </section>
+
+        <section class="rule-section">
+            <h2>§2 Spam / Flood</h2>
+            <ul class="rule-list">
+                <li><span>2.1</span> Zakaz spamowania na czacie.</li>
+                <li><span>2.2</span> Zakaz floodowania czatu.</li>
+            </ul>
+        </section>
+
+        <section class="rule-section">
+            <h2>§3 Trapy</h2>
+            <ul class="rule-list">
+                <li><span>3.1</span> Zakazane jest trapowanie obok borderu.</li>
+                <li><span>3.2</span> Zakaz posiadania mobów w trapie.</li>
+                <li><span>3.3</span> Maksymalnie 3 wagoniki i armor standy w trapie.</li>
+                <li><span>3.4</span> Zakaz używania amethystu w trapach.</li>
+                <li><span>3.5</span> Trapy muszą umożliwiać ucieczkę.</li>
+                <li><span>3.6</span> Zakaz leżenia w trapie.</li>
+                <li><span>3.7</span> Zakaz altowania w trapie.</li>
+                <li><span>3.8</span> Zakaz używania dispenserów spamujących wagonikami i armor standami.</li>
+            </ul>
+        </section>
+
+        <section class="rule-section">
+            <h2>§4 Multikonta</h2>
+            <ul class="rule-list">
+                <li><span>4.1</span> Zakaz łamania regulaminu na mk w celu uniknięcia blokady na głównym koncie.</li>
+                <li><span>4.2</span> Zakaz grania na multikontach po otrzymaniu bana.</li>
+                <li><span>4.3</span> Zakaz Multi-AFK.</li>
+                <li><span>4.4</span> Zakaz posiadania jakiegokolwiek multikonta.</li>
+            </ul>
+        </section>
+
+        <section class="rule-section">
+            <h2>§5 Podszywanie się</h2>
+            <ul class="rule-list">
+                <li><span>5.1</span> Zakaz podszywania się pod administrację.</li>
+                <li><span>5.2</span> Zakaz podszywania się pod graczy.</li>
+            </ul>
+        </section>
+
+        <section class="rule-section">
+            <h2>§6 Budowle</h2>
+            <ul class="rule-list">
+                <li><span>6.1</span> Zakaz robienia lavacastów na spawnie.</li>
+                <li><span>6.2</span> Zakaz budowania treści seksualnych, rasistowskich i innych nieodpowiednich.</li>
+            </ul>
+        </section>
+
+        <section class="rule-section">
+            <h2>§7 Sprawdzanie</h2>
+            <ul class="rule-list">
+                <li><span>7.1</span> Na dołączenie na kanał „Czekam na Sprawdzanie” masz 3 minuty.</li>
+                <li><span>7.2</span> Wyłączenie streama podczas sprawdzania jest zakazane.</li>
+                <li><span>7.3</span> Wyjście z gry podczas sprawdzania jest zakazane.</li>
+            </ul>
+        </section>
+
+        <section class="rule-section">
+            <h2>§8 Modyfikacje i Cheaty</h2>
+            <ul class="rule-list">
+                <li><span>8.1</span> Dozwolone są tylko mody: Optifine, Blazing Pack oraz poprawiające wydajność.</li>
+                <li><span>8.2</span> Minimapa jest zakazana.</li>
+                <li><span>8.3</span> FreeCam jest zabroniony.</li>
+                <li><span>8.4</span> Zakazuje się korzystania z cheatów.</li>
+                <li><span>8.5</span> Przyznanie się do cheatów jest równoznaczne z potwierdzeniem winy.</li>
+            </ul>
+        </section>
+
+        <section class="rule-section">
+            <h2>§9 Inne</h2>
+            <ul class="rule-list">
+                <li><span>9.1</span> Zakaz wypychania graczy ze spawna.</li>
+                <li><span>9.2</span> Zakaz proszenia o KeyAll i inne przedmioty.</li>
+                <li><span>9.3</span> Zakaz sprzedawania przedmiotów z gry za realne pieniądze.</li>
+                <li><span>9.4</span> Zakaz włamywania się na konta graczy.</li>
+                <li><span>9.5</span> Zachowania uznane przez administrację za niewłaściwe są zabronione.</li>
+            </ul>
+        </section>
+
+        <section class="rule-section">
+            <h2>§10 Błędy gry / PvP</h2>
+            <ul class="rule-list">
+                <li><span>10.1</span> Zakazane jest kopiowanie przedmiotów.</li>
+                <li><span>10.2</span> Zakazane jest wykorzystywanie glitchy i błędów w grze.</li>
+                <li><span>10.3</span> Zakaz farmienia killi (max. 2 na 5 min). Wyjątek: dobrowolna walka (SkyGen).</li>
+                <li><span>10.4</span> Zakaz „dawania killi” (wchodzenie na PvP bez seta).</li>
+            </ul>
+        </section>
+
+        <section class="rule-section">
+            <h2>§11 Zasady Ogólne</h2>
+            <ul class="rule-list">
+                <li><span>11.1</span> Odwołanie możliwe w ciągu 7 dni od decyzji.</li>
+                <li><span>11.2</span> Decyzja administracji nie podlega dyskusji.</li>
+            </ul>
+        </section>
+
+    </main>
+
+    <footer>
+        &copy; 2026 VoluxMC
+    </footer>
+
+</body>
+</html>

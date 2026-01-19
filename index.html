@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoluxMC - Twoje płomienne community</title>
+    <style>
+        /* Podstawowe style */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #121212;
+            color: white;
+            scroll-behavior: smooth;
+        }
+
+        /* PASEK NAWIGACJI */
+/* PASEK NAWIGACJI */
+        nav {
+            background-color: rgba(255, 255, 255, 0.98); /* Bardziej solidna biel */
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 60px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            box-sizing: border-box;
+            z-index: 1000;
+            border-bottom: 3px solid #ff4500;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3); /* Cień pod paskiem */
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            color: #000000; /* Ciemny kolor bazowy dla kontrastu */
+            text-decoration: none;
+            font-weight: 700; /* Grubasza czcionka */
+            text-transform: uppercase;
+            font-size: 1rem;
+            letter-spacing: 1px; /* Większe odstępy między literami */
+            transition: all 0.3s ease;
+            padding: 10px 0;
+            display: inline-block;
+        }
+
+        /* Efekt po najechaniu na link */
+        .nav-link:hover {
+            color: #ff4500;
+            transform: translateY(-2px); /* Delikatne uniesienie */
+        }
+
+        /* Animowana linia pod napisem */
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(90deg, #ff4500, #ff8800);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .logo-container img {
+            height: 70px; /* Nieco większe logo dla balansu */
+            transition: transform 0.3s ease;
+            filter: drop-shadow(0 0 5px rgba(255, 69, 0, 0.3));
+        }
+
+        .logo-container img:hover {
+            transform: scale(1.05) rotate(2deg); /* Interaktywne logo */
+        }
+
+        /* SEKCJA GŁÓWNA (HERO) */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                        url('tlo.jpg') no-repeat center center;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* Napis VoluxMC z gradientem */
+        .hero h1 {
+            font-size: 4.5rem;
+            margin: 0;
+            font-weight: bold;
+            background: linear-gradient(90deg, #ff4500, #ff8800);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            /* Cień dodany przez filtr, aby nie zasłaniał gradientu */
+            filter: drop-shadow(2px 2px 5px rgba(0,0,0,0.5));
+        }
+
+        /* Podpis na biało */
+        .hero p {
+            font-size: 1.5rem;
+            margin-top: 10px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
+        }
+
+    </style>
+</head>
+<body>
+
+<nav>
+        <div class="nav-item">
+            <a href="taryfikator.html" class="nav-link">Taryfikator</a>
+        </div>
+
+        <div class="nav-item">
+            <a href="https://sklep.voluxmc.pl" target="_blank" class="nav-link"">Sklep</a>
+        </div>
+        
+        <div class="logo-container">
+            <a href="index.html"><img src="logo.png" alt="VoluxMC Logo"></a>
+        </div>
+
+        <div class="nav-item">
+            <a href="regulamin.html" class="nav-link">Regulamin</a>
+        </div>
+
+        <div class="nav-item">
+            <a href="https://dc.voluxmc.pl" target="_blank" class="nav-link" ">Discord</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h1>VoluxMC</h1>
+        <p>Twoje płomienne community</p>
+    </header>
+
+</body>
+</html>
