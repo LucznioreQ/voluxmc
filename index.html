@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoluxMC</title>
+    <link rel="icon" href="logo.png" sizes="16x16" type="image/png">
+    <style>
+        /* --- ANIMACJA ŁADOWANIA --- */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #121212;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loader {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, #000000, #f62900,  #ff4500, #000000, #000000);
+            -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 8px), #000 0);
+            mask: radial-gradient(farthest-side, transparent calc(100% - 8px), #000 0);
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @font-face {
+            font-family: 'BubbleBrush';
+            src: url('bubble-brush.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'BubbleBrush', 'Arial', sans-serif;
+            background-color: #121212;
+            color: white;
+            scroll-behavior: smooth;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        nav {
+            background-color: rgba(255, 255, 255, 0.98);
+            height: 110px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 80px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            box-sizing: border-box;
+            z-index: 1000;
+            border-bottom: 3px solid #ff4500;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .nav-link {
+            color: #000000;
+            text-decoration: none;
+            font-weight: 400; 
+            text-transform: uppercase;
+            font-size: 3.2rem;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            padding: 10px 0;
+            display: inline-block;
+            text-shadow: 3px 3px 0px rgba(0,0,0,0.3);
+        }
+
+        .logo-container img {
+            height: 90px;
+            transition: transform 0.3s ease;
+            filter: drop-shadow(0 0 5px rgba(255, 69, 0, 0.3));
+        }
+
+        .nav-item { position: relative; }
+
+        .nav-link:hover {
+            color: #ff4500;
+            transform: translateY(-2px) scale(1.1);
+            text-shadow: 3px 3px 0px rgba(255, 106, 0, 0.6);
+        }
+
+        .logo-container img:hover {
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(18, 18, 18, 1)), 
+                        url('tlo.jpg') no-repeat center center;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 10rem;
+            margin: 0;
+            font-weight: bold;
+            background: linear-gradient(90deg, #ff4500, #ff8800);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            filter: drop-shadow(2px 2px 5px rgba(0,0,0,0.5));
+        }
+
+        .hero p {
+            font-size: 6rem;
+            margin-top: 10px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 3px 3px 0px rgba(0,0,0,0.3);
+        }
+
+        /* --- NOWY ELEMENT SMOOTHER --- */
+        .transition-curve {
+            height: 200px;
+            background: linear-gradient(to bottom, #121212, #ffffff);
+            width: 100%;
+        }
+
+.admin-section {
+        padding: 50px 20px;
+        background-color: #ffffff;
+        margin-top: -100px; /* Podciągamy sekcję do góry, żeby nachodziła na maskę */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: #333333;
+        z-index: 2; /* Upewniamy się, że jest nad hero */
+        position: relative;
+    }
+
+        .section-title {
+            font-size: 7rem;
+            margin-bottom: 50px;
+            color: #c20505;
+            text-shadow: 3px 3px 0px rgba(255, 31, 31, 0.3);
+        }
+
+        .admin-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    max-width: 1600px;
+    margin: 0 auto;
+    justify-content: center;
+}
+
+@media (max-width: 1200px) {
+    .admin-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    .admin-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .admin-container {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+footer {
+    background-color: #ffffff;
+    border-top: 1px solid #e0e0e0;
+    text-align: center;
+    padding: 40px;
+    color: #888;
+    font-size: 0.9rem;
+    font-family: Arial, sans-serif;
+}
+
+.admin-card {
+    font-family: Arial, sans-serif;
+
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(8px);
+    padding: 30px;          /* było 20px */
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    gap: 20px;              /* było 10px */
+    width: 450px;           /* było 320px */
+
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.admin-card:hover {
+    transform: translateY(-5px);
+    border-color: #cdcdcd;
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.18); /* cień przy najechaniu */
+}
+
+.admin-head {
+    width: 96px;   /* było 64px */
+    height: 96px;  /* było 64px */
+    border-radius: 10px;
+    image-rendering: pixelated;
+}
+.admin-role {
+    font-family: 'BubbleBrush';
+    padding: 0;
+    margin-right: 6px;
+    border-radius: 0;
+    font-size: 2.1rem;
+        margin-top: 0;
+        color: #121212;
+}
+
+.ceo {
+    color: #da0000;
+    text-shadow: 2px 2px 0px rgba(255, 0, 0, 0.3);
+}
+
+.eca {
+    color: #00c98d;
+    text-shadow: 2px 2px 0px rgba(0, 201, 141, 0.3);
+}
+
+.headadmin {
+    color: #c6001a;
+    text-shadow: 2px 2px 0px rgba(199, 0, 30, 0.3);
+}
+
+.admin {
+    color: #e60049;
+    text-shadow: 2px 2px 0px rgba(249, 0, 83, 0.3);
+}
+
+.mod {
+    color: #9500eb;
+    text-shadow: 2px 2px 0px rgba(139, 0, 220, 0.3);
+}
+
+.helper {
+    color: #00d4aa;
+    text-shadow: 2px 2px 0px rgba(0, 212, 170, 0.3);
+}
+
+
+        
+        .admin-name { margin: 5px 0; font-size: 1.5rem; color: #1a1a1a; font-family: 'Arial';}
+
+.wave-divider svg {
+    width: 120%;
+    margin-left: 0%;
+    display: block;
+}
+.wave-divider {
+    position: relative;
+    transform: translateX(-5%);
+}
+
+.server-status {
+    margin-top: 51px; /* 30px * 1.7 */
+    background: rgba(253, 253, 253, 0.9);
+    border: 3.4px solid #c8c8c8; /* 2px * 1.7 */
+    padding: 17px 42.5px; /* 10px 25px * 1.7 */
+    border-radius: 25.5px; /* 15px * 1.7 */
+    font-size: 4.25rem; /* 2.5rem * 1.7 */
+    color: rgb(24, 24, 24);
+    text-shadow: 5.1px 5.1px 0px rgba(0, 0, 0, 0.3); /* 3px * 1.7 */
+    display: inline-flex;
+    align-items: center;
+    transition: transform 0.3s ease;
+}
+
+.server-status:hover {
+    transform: scale(1.05);
+}
+
+.online-dot {
+    display: inline-block;
+    width: 20.4px; /* 12px * 1.7 */
+    height: 20.4px; /* 12px * 1.7 */
+    background-color: #00ff73;
+    border-radius: 50%;
+    margin-right: 17px; /* 10px * 1.7 */
+    box-shadow: 0 0 0 rgba(0, 255, 115, 0.4);
+    animation: pulse-green 2s infinite;
+    vertical-align: middle;
+}
+
+@keyframes pulse-green {
+    0% { box-shadow: 0 0 0 0 rgba(0, 255, 115, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(0, 255, 115, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(0, 255, 115, 0); }
+}
+
+/* Powiększony przycisk */
+.copy-btn {
+    margin-top: 30px;
+    background: #00ff73;
+    border: 3px solid #039f004d;
+    padding: 20px 50px; /* Zwiększone paddingi */
+    border-radius: 20px;
+    font-size: 2.5rem; /* Zwiększona czcionka */
+    font-family: 'BubbleBrush', cursive;
+    color: #121212;
+    cursor: pointer;
+    transition: transform 0.3s ease, background 0.3s ease;
+    box-shadow: 0 6px 20px rgba(0, 255, 115, 0.4);
+    text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.3);
+}
+
+.copy-btn:hover {
+    transform: scale(1.1);
+    background: #00cc5c;
+}
+
+/* Powiadomienie na środku z animacją */
+.notification {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #00ff73;;
+    padding: 30px 60px;
+    border: 3px solid #039f004d;
+    border-radius: 20px;
+    color: #181818;
+    font-size: 3.5rem;
+    font-family: 'BubbleBrush', sans-serif;
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none; 
+    transition: opacity 0.5s ease;
+    text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.3);
+}
+
+.notification.show {
+    opacity: 1;
+}
+    </style>
+</head>
+<body>
+
+<div id="preloader">
+    <svg class="loader" viewBox="0 0 50 50">
+        <circle cx="25" cy="25" r="20" fill="none" stroke-width="6" 
+                style="stroke: url(#gradient); stroke-linecap: round;"></circle>
+        <defs>
+            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#000000;stop-opacity:1" />
+                <stop offset="50%" style="stop-color:#f62900;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#ff4500;stop-opacity:1" />
+            </linearGradient>
+        </defs>
+    </svg>
+</div>
+
+<nav>
+    <div class="nav-item">
+        <a href="taryfikator.html" class="nav-link">Taryfikator</a>
+    </div>
+    <div class="nav-item">
+        <a href="https://sklep.voluxmc.pl" target="_blank" class="nav-link">Sklep</a>
+    </div>
+    <div class="logo-container">
+        <a href="index.html"><img src="logo.png" alt="VoluxMC Logo"></a>
+    </div>
+    <div class="nav-item">
+        <a href="regulamin.html" class="nav-link">Regulamin</a>
+    </div>
+    <div class="nav-item">
+        <a href="https://dc.voluxmc.pl" target="_blank" class="nav-link">Discord</a>
+    </div>
+</nav>
+
+<header class="hero">
+    <h1>VoluxMC</h1>
+    <p>Twoje płomienne community</p>
+
+    <div class="server-status" id="server-status">
+    <span class="online-dot"></span> Ładowanie graczy...
+</div>
+<button class="copy-btn" onclick="copyIP()">
+        Dołącz: <strong>voluxmc.pl</strong>
+    </button>
+
+    <div id="copy-notification" class="notification">
+        Pomyślnie skopiowano IP serwera!
+    </div>
+</header>
+
+
+
+<div class="wave-divider">
+    <svg viewBox="0 0 1440 180" preserveAspectRatio="none">
+        <defs>
+            <filter id="blur-wave">
+                <feGaussianBlur stdDeviation="3"/>
+            </filter>
+        </defs>
+
+        <path
+            filter="url(#blur-wave)"
+            fill="#fff"
+            d="M0,80 C250,180 500,0 720,80 C940,160 1180,20 1440,100 L1440,180 L0,180 Z">
+        </path>
+    </svg>
+</div>
+
+<section class="admin-section">
+    <h2 class="section-title">Administracja</h2>
+
+    <div class="admin-container">
+
+        <div class="admin-card">
+            <img src="https://minotar.net/helm/LucznioreQ/64" alt="Luczus" class="admin-head">
+            <div class="admin-info">
+                <h3 class="admin-name">
+                    <span class="admin-role ceo">CEO</span> LucznioreQ
+                </h3>
+                <p class="admin-desc">pracuje jak mi sie zachce</p>
+            </div>
+        </div>
+
+        <div class="admin-card">
+            <img src="https://minotar.net/helm/KsaBaX/64" alt="Ksabusiek" class="admin-head">
+            <div class="admin-info">
+                <h3 class="admin-name">
+                    <span class="admin-role eca">ECA</span> Ksabusiek
+                </h3>
+                <p class="admin-desc">Gram w minecraft robie kontent</p>
+            </div>
+        </div>
+
+        <div class="admin-card">
+            <img src="https://minotar.net/helm/Modzajtobarti69/64" alt="NnkuTop67" class="admin-head">
+            <div class="admin-info">
+                <h3 class="admin-name">
+                    <span class="admin-role headadmin">HeadAdmin</span> NnkuTop67
+                </h3>
+                <p class="admin-desc">umiem bardzo dobrze pvp</p>
+            </div>
+        </div>
+
+        <div class="admin-card">
+            <img src="https://minotar.net/helm/Harry2140/64" alt="Harry2140" class="admin-head">
+            <div class="admin-info">
+                <h3 class="admin-name">
+                    <span class="admin-role mod">Moderator</span> Harry2140
+                </h3>
+                <p class="admin-desc">wnerwiam luczqa</p>
+            </div>
+        </div>
+
+ 
+
+        <div class="admin-card">
+            <img src="https://minotar.net/helm/Nikotini980/64" alt="Nikotini980" class="admin-head">
+            <div class="admin-info">
+                <h3 class="admin-name">
+                    <span class="admin-role mod">Moderator</span> Nikotini980
+                </h3>
+                <p class="admin-desc">sprzedaje faworke</p>
+            </div>
+        </div>
+
+        <div class="admin-card">
+            <img src="https://minotar.net/helm/Trust/64" alt="Trust" class="admin-head">
+            <div class="admin-info">
+                <h3 class="admin-name">
+                    <span class="admin-role mod">Moderator</span> TrustMeYouLoveIt
+                </h3>
+                <p class="admin-desc">nie wiem</p>
+            </div>
+        </div>
+
+        <div class="admin-card">
+            <img src="https://minotar.net/helm/ModzajtoBarti69/64" alt="ModzajtoBarti69" class="admin-head">
+            <div class="admin-info">
+                <h3 class="admin-name">
+                    <span class="admin-role mod">Moderator</span> ModzajtoBarti69
+                </h3>
+                <p class="admin-desc">...</p>
+            </div>
+        </div>
+
+        <div class="admin-card">
+            <img src="https://minotar.net/helm/kub5zta1_/64" alt="kubsztal" class="admin-head">
+            <div class="admin-info">
+                <h3 class="admin-name">
+                    <span class="admin-role helper">Helper</span> kubsztal
+                </h3>
+                <p class="admin-desc">Jestem pro i nie mam pracy (:</p>
+            </div>
+        </div>
+
+        <div class="admin-card">
+            <img src="https://minotar.net/helm/Q8ik_/64" alt="Q8ik_" class="admin-head">
+            <div class="admin-info">
+                <h3 class="admin-name">
+                    <span class="admin-role helper">Helper</span> Q8ik_
+                </h3>
+                <p class="admin-desc">ja</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<script>
+window.addEventListener('load', function() {
+    const preloader = document.getElementById('preloader');
+    setTimeout(() => {
+        preloader.style.opacity = '0';
+        setTimeout(() => {
+            preloader.style.display = 'none';
+        }, 500);
+    }, 800); 
+});
+const serverAddress = 'voluxmc.pl'; 
+    
+    fetch(`https://api.mcsrvstat.us/2/${serverAddress}`)
+        .then(response => response.json())
+        .then(data => {
+            const statusElement = document.getElementById('server-status');
+            if (data.online) {
+                statusElement.innerHTML = '<span class="online-dot"></span>&nbsp;Online:&nbsp; <strong>' + data.players.online + ' graczy</strong>';
+            } else {
+                statusElement.innerHTML = 'Serwer jest aktualnie offline';
+            }
+        })
+        .catch(() => {
+            document.getElementById('server-status').innerHTML = 'Nie udało się pobrać statusu';
+        });
+
+        function copyIP() {
+    const ip = "voluxmc.pl";
+    navigator.clipboard.writeText(ip).then(() => {
+        const note = document.getElementById('copy-notification');
+        
+        // Dodajemy klasę show, która uruchamia animację opacity
+        note.classList.add('show');
+        
+        // Po 2 sekundach usuwamy klasę (animacja znikania trwa 0.5s)
+        setTimeout(() => {
+            note.classList.remove('show');
+        }, 2000);
+    });
+}
+</script>
+<footer>
+    &copy; 2026 VoluxMC
+</footer>
+</body>
+</html>
